@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'components/categories.dart';
 import 'components/search_form.dart';
+import 'components/section_title.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -58,11 +60,12 @@ class HomeScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: defaultPadding),
               child: SearchForm(),
             ),
-            CategoryCard(
-              icon: "assets/icons/dress.svg",
-              title: "Dress",
-              press: () {},
-            )
+            const Categories(),
+            const SizedBox(
+              height: defaultPadding,
+            ),
+            SectionTitle(title: "New Arrival", pressSeeAll: () {}),
+            ProductCard(),
           ],
         ),
       ),
@@ -70,43 +73,64 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class CategoryCard extends StatelessWidget {
-  const CategoryCard({
+class ProductCard extends StatelessWidget {
+  const ProductCard({
     Key? key,
-    required this.icon,
-    required this.title,
-    required this.press,
   }) : super(key: key);
-
-  final String icon, title;
-  final VoidCallback press;
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-        onPressed: press,
-        style: OutlinedButton.styleFrom(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(defaultBorderRadius),
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        width: 154,
+        padding: const EdgeInsets.all(defaultPadding / 2),
+        decoration: const BoxDecoration(
+          color: Colors.red,
+          borderRadius: BorderRadius.all(
+            Radius.circular(
+              defaultBorderRadius,
             ),
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-              vertical: defaultPadding / 4, horizontal: defaultPadding / 2),
-          child: Column(
-            children: [
-              SvgPicture.asset(icon),
-              const SizedBox(
-                height: defaultPadding / 2,
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Color(0xFFEFEFF2),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(
+                    defaultBorderRadius,
+                  ),
+                ),
               ),
-              Text(
-                title,
-                style: Theme.of(context).textTheme.subtitle2,
+              child: Image.asset(
+                "assets/images/product_0.png",
+                height: 132,
               ),
-            ],
-          ),
-        ));
+            ),
+            const SizedBox(height: defaultPadding / 2),
+            Row(
+              children: [
+                const Expanded(
+                  child: Text(
+                    "Long Sleeve Shirts",
+                    style: TextStyle(
+                      color: Colors.black54,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: defaultPadding / 4),
+                Text(
+                  "\$165",
+                  style: Theme.of(context).textTheme.subtitle2,
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
