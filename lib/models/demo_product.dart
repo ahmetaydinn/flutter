@@ -13,7 +13,7 @@ class Product {
   });
 }
 
-List<Product> demo_product = [
+List<Product> demoProduct = [
   Product(
     image: "assets/images/product_0.png",
     title: "Long Sleeve Shirts",
